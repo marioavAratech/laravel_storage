@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\TestController;
 use \App\Http\Controllers\MainController;
 use \App\Http\Controllers\ItemController;
+use \App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,48 @@ use \App\Http\Controllers\ItemController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/test',function(){
+//Obtener Datos
+//     $user=User::find(1);
+//     $user=User::select("*")->where('id',1)->get();
+    
+//     $users=User::all();
+//     $users=User::select('name','lastname','email')->get();
+//     foreach($users as $user){
+//         echo $user->name.", ".$user->lastname.", ".$user->email.'<br>';
+//     }
+
+//     dd($users);
+//Modificar Datos
+//     $user=User::find(1);
+
+//     $user->name="Mario";
+//     $user->save();
+
+//     User::where('id',1)->update([
+//         "lastname"=>"apellido",
+//     ]);
+
+//Eliminar
+//     $user=User::find(11);
+//     $user->delete();
+
+//Crear/Insertar
+//     User::create([
+//         "name"=>"Mario nuevo",
+//         "lastname"=>"Mario apellido",
+//         "email"=>"mario@mario.es",
+//         "password"=>\Illuminate\Support\Facades\Hash::make("123456")
+//     ]);
+//     $user = new User();
+//     $user->name = "nuevo user";
+//     $user->lastname = "nuevo user lastname";
+//     $user->email = "nuevo@user.es";
+//     $user->password = \Illuminate\Support\Facades\Hash::make("123456");
+//     $user->save();
+});
+
 
 Route::get('/',[MainController::class,"index"] );
 

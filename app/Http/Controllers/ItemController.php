@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\Vehiculo;
+
 
 class ItemController extends Controller
 {
@@ -10,9 +12,9 @@ class ItemController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $data=["0"=>"item1","1"=>"item2","2"=>"item3","3"=>"item4"];
-        return view("itemViews.index",["data"=>$data]);
+    {     
+        $vehiculos=Vehiculo::select('matricula','modelo','fecha_matriculacion','peso','color','itv_pasada')->get();
+        return view("itemViews.index",["data"=>$vehiculos]);
     }
 
     /**
@@ -28,7 +30,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        
+        Vehiculo::create([
+            "modelo"=>$request->modelo,
+            "peso"=>$request->peso,
+            "color"=>$request->color,
+            "itv_pasada"=>true
+        ]);
+
+        return redirect()->route('listar.items');
     }
 
     /**
@@ -52,8 +62,13 @@ class ItemController extends Controller
      */
     public function update(Request $request)
     {
-        //dd($request->all());
-        echo "Editanto el item con id $request->idItem y poniendo de nombre $request->item";
+        Vehiculo::where('matricula',$request->idItem)->update([
+            "modelo"=>$request->modelo,
+            "peso"=>$request->peso,
+            "color"=>$request->color,
+        ]);
+
+        return redirect()->route('listar.items');
     }
 
     /**
@@ -61,6 +76,8 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        echo "Elemento con id $id ha sido eliminado.";
+        Vehiculo::where('matricula',$id)->delete();
+
+        return redirect()->route('listar.items');
     }
 }

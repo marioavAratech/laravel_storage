@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-12">
-            <h1>Ver item id = {{$id}}</h1>
+            <h1>Ver vehiculo con matricula = {{$id}}</h1>
         </div>
 
     </div>
