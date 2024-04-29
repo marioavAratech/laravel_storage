@@ -18,8 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if(count($data)>0)
-                @foreach($data as $index => $item)
+                @forelse($data as $index => $item)
                     <tr>
                         <th scope="row">{{$item->matricula}}</th>
                         <th scope="row">{{$item->modelo}}</th>
@@ -31,10 +30,9 @@
                         <th scope="row"><a href="{{route('eliminar.item',$item->matricula)}}">Eliminar</a></th>
                         <th scope="row"><a href="{{route('mostrar.item',$item->matricula)}}">Mostrar</a></th>
                     </tr>
-                @endforeach     
-                @else
+                @empty
                     <p>No hay elementos en la lista</p>
-                @endif
+                @endforelse
                 </tbody>
             </table>
         </div>
