@@ -3,21 +3,39 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="cold-md-5">
+        <div class="col-md-6" style="margin: auto">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-
+                
                 <!-- Name -->
                 <div>
-                    <x-input-label for="name" :value="__('Name')" />
+                    <x-input-label for="name" :value="__('Nombre')" />
                     <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
 
                 <div class="mt-4">
-                    <x-input-label for="lastname" :value="__('LastName')" />
-                    <x-text-input id="lastname" class="block mt-1 w-full" type="lastname" name="lastname" :value="old('lastname')" required autocomplete="lastname" />
+                    <x-input-label for="lastname" :value="__('Apellido')" />
+                    <x-text-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autocomplete="lastname" />
                     <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="direccion" :value="__('Direccion')" />
+                    <x-text-input id="direccion" class="block mt-1 w-full" type="text" name="direccion" :value="old('direccion')" required autocomplete="direccion" />
+                    <x-input-error :messages="$errors->get('direccion')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="ciudad" :value="__('Ciudad')" />
+                    <x-text-input id="ciudad" class="block mt-1 w-full" type="text" name="ciudad" :value="old('ciudad')" required autocomplete="ciudad" />
+                    <x-input-error :messages="$errors->get('ciudad')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="pais" :value="__('Pais')" />
+                    <x-text-input id="pais" class="block mt-1 w-full" type="text" name="pais" :value="old('pais')" required autocomplete="pais" />
+                    <x-input-error :messages="$errors->get('pais')" class="mt-2" />
                 </div>
 
                 <!-- Email Address -->
@@ -48,6 +66,38 @@
                                     name="password_confirmation" required autocomplete="new-password" />
 
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="telefono" :value="__('Telefono')" />
+                    <x-text-input id="telefono" class="block mt-1 w-full" type="tel" name="telefono" :value="old('telefono')" required autocomplete="telefono" />
+                    <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="codigoPostal" :value="__('Codigo Postal')" />
+                    <x-text-input id="codigoPostal" class="block mt-1 w-full" type="text" name="codigoPostal" :value="old('codigoPostal')" required autocomplete="codigoPostal" />
+                    <x-input-error :messages="$errors->get('codigoPostal')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <x-input-label for="nacimiento" :value="__('Fecha de Nacimiento')" />
+                    <x-text-input id="nacimiento" class="block mt-1 w-full" type="date" name="nacimiento" :value="old('nacimiento')" required autocomplete="nacimiento" />
+                    <x-input-error :messages="$errors->get('nacimiento')" class="mt-2" />
+                </div>
+
+                <div class="mt-4">
+                    <fieldset>
+                        <legend>Genero</legend>
+                        <div>
+                            <x-input-label for="genero" :value="__('Masculino')" />
+                            <x-text-input id="masculino" class="block mt-1 w-full" type="radio" name="genero" :value="old('genero')" required autocomplete="genero" />
+                        </div>
+                        <div>
+                            <x-input-label for="genero" :value="__('Femenino')" />
+                            <x-text-input id="femenino" class="block mt-1 w-full" type="radio" name="genero" :value="old('genero')" required autocomplete="genero" />
+                        </div>
+                    </fieldset>
                 </div>
 
                 <div class="flex items-center justify-end mt-4">

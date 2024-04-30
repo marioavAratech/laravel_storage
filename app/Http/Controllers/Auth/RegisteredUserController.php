@@ -33,20 +33,35 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
+            'direccion' => ['required', 'string', 'max:255'],
+            'ciudad' => ['required', 'string', 'max:255'],
+            'pais' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'telefono' => ['required', 'numeric','digits_between:10,15'],
+            'codigoPostal' => ['required', 'string', 'max:10'],
+            'nacimiento' => ['required', 'date','before:-18 years'],
+            'genero' => ['required', 'string'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'lastname' =>$request->lastname,
+            'direccion' =>$request->direccion,
+            'ciudad' =>$request->ciudad,
+            'pais' =>$request->pais,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'telefono' =>$request->telefono,
+            'codigoPostal' =>$request->codigoPostal,
+            'nacimiento' =>$request->nacimiento,
+            'genero' =>$request->genero,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/');
     }
 }
