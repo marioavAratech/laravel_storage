@@ -21,11 +21,6 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-             'name' => 'Test User',
-             'lastname' => 'fake lastname',
-             'email' => 'test@example.com',
-             'password' => Hash::make(123456)
-        ]);
+        
     }
 }

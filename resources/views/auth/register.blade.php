@@ -91,11 +91,11 @@
                         <legend>Genero</legend>
                         <div>
                             <x-input-label for="genero" :value="__('Masculino')" />
-                            <x-text-input id="masculino" class="block mt-1 w-full" type="radio" name="genero" :value="old('genero')" required autocomplete="genero" />
+                            <x-text-input id="masculino" class="block mt-1 w-full" type="radio" name="genero" :value="old('genero')" required autocomplete="genero" value="masculino"/>
                         </div>
                         <div>
                             <x-input-label for="genero" :value="__('Femenino')" />
-                            <x-text-input id="femenino" class="block mt-1 w-full" type="radio" name="genero" :value="old('genero')" required autocomplete="genero" />
+                            <x-text-input id="femenino" class="block mt-1 w-full" type="radio" name="genero" :value="old('genero')" required autocomplete="genero" value="femenino"/>
                         </div>
                     </fieldset>
                 </div>
