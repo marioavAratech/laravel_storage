@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\FicheroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[MainController::class,"index"] );
+Route::get('/',[MainController::class,"index"] )->name('volver.index');
 
 Route::get('/listar',[VehiculoController::class,"index"] )->name("listar.items");
 Route::get('/crear',[VehiculoController::class,"showFormCreate"] )->name("mostrar.crear");
@@ -25,6 +26,7 @@ Route::get('/eliminar/{id}',[VehiculoController::class,"destroy"] )->name("elimi
 Route::POST('/actualizar',[VehiculoController::class,"update"] )->name("actualizar.item");
 Route::get('/mostrar/{id}',[VehiculoController::class,"show"] )->name("mostrar.item");
 Route::POST('/store',[VehiculoController::class,"store"] )->name("crear.item");
+Route::get('/listarFicheros',[FicheroController::class,"index"] )->name("listar.ficheros");
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/subirFichero',[FicheroController::class,"showFormFichero"] )->name("mostrar.subirFichero");
+    Route::POST('/storeFichero',[FicheroController::class,"store"] )->name("crear.fichero");
 });
+
 
 require __DIR__.'/auth.php';

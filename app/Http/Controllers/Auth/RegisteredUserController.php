@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Models\Fichero;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -28,21 +31,13 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'direccion' => ['required', 'string', 'max:255'],
-            'ciudad' => ['required', 'string', 'max:255'],
-            'pais' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'telefono' => ['required', 'numeric','digits_between:10,15'],
-            'codigoPostal' => ['required', 'string', 'max:10'],
-            'nacimiento' => ['required', 'date','before:-18 years'],
-            'genero' => ['required', 'string'],
-        ]);
+        if($request->hasFile('avatar') && $request->file('avatar') ){
+            $uploadedFile = $request->file('avatar');
+            $fileName = $uploadedFile->getClientOriginalName();
+            $path = Storage::putFileAs('public/avatars', $uploadedFile, $fileName);
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -56,6 +51,7 @@ class RegisteredUserController extends Controller
             'codigoPostal' =>$request->codigoPostal,
             'nacimiento' =>$request->nacimiento,
             'genero' =>$request->genero,
+            'avatar'=>$fileName??null,
         ]);
 
         event(new Registered($user));

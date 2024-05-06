@@ -29,6 +29,9 @@
                 Cerrar Sesion
             </a>
         </form>
+        <li class='nav-item'>
+          <img src="storage/avatars/{{\Illuminate\Support\Facades\Auth::user()->avatar}}">
+        </li>
         @endauth
 
       </ul>

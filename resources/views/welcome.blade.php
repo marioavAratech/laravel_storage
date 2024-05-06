@@ -12,7 +12,10 @@
                         <a href="{{route('mostrar.editar',1)}}">Editar elementos</a>
                     </div>
                     <div class="col-md-2 box">
-                        <p>Eliminar todo</p>
+                        <a href="{{route('listar.ficheros')}}">Listar ficheros</a>
+                    </div>
+                    <div class="col-md-2 box">
+                        <a href="{{route('mostrar.subirFichero')}}">Subir fichero</a>
                     </div>
             </div>
         </div>
