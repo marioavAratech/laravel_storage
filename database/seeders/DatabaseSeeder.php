@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ModeloSeeder::class);
 
 
-        User::truncate();
+        //User::truncate();
         \App\Models\User::factory(10)->create();
 
-        
+
     }
 }

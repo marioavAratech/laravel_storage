@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class FicheroController extends Controller
 {
     public function index()
-    {     
+    {
         $ficheros=Fichero::all();
         return view("ficheroViews.index",["data"=>$ficheros]);
     }
@@ -26,23 +26,34 @@ class FicheroController extends Controller
         $validacion = Validator::make($request->all(), [
             'fichero'=> 'max:10240',
         ]);
-        
+
         if ($validacion->fails()) {
-            return ('Supera el tamaño máximo permitido.'); 
+            return ('Supera el tamaño máximo permitido.');
         } else {
             $uploadedFile = $request->file('fichero');
             $fileName = $uploadedFile->getClientOriginalName();
             $randomName=Str::random(10).substr($fileName,-4);
-    
             Fichero::create([
                 'nombre'=>$randomName,
                 'tipoFichero'=>$uploadedFile->getClientMimeType(),
                 'userId'=>Auth::user()->id,
             ]);
-            
             Storage::putFileAs('public/files', $uploadedFile,$randomName);
-    
-            return redirect()->route('volver.index');
+            return redirect()->route('home');
         }
+    }
+
+    public function destroy(string $id)
+    {
+
+        $fichero = Fichero::find($id);
+       if($fichero!=null && Storage::disk('public')->exists("files/$fichero->nombre")){
+           Storage::disk('public')->delete("files/$fichero->nombre");
+           $fichero->delete();
+           return redirect()->route('listar.ficheros')->with('success',"Fichero eliminado correctamente");
+       }else{
+           return redirect()->route('listar.ficheros')->with('error',"El fichero no se encontró");
+       }
+
     }
 }

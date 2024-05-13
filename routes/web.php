@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[MainController::class,"index"] )->name('volver.index');
+Route::get('/',[MainController::class,"index"] )->name('home');
 
 Route::get('/listar',[VehiculoController::class,"index"] )->name("listar.items");
 Route::get('/crear',[VehiculoController::class,"showFormCreate"] )->name("mostrar.crear");
@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/subirFichero',[FicheroController::class,"showFormFichero"] )->name("mostrar.subirFichero");
     Route::POST('/storeFichero',[FicheroController::class,"store"] )->name("crear.fichero");
+    Route::get('/eliminarFichero/{fichero_id}',[FicheroController::class,"destroy"] )->name("eliminar.fichero");
+
 });
 
 
