@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\VehiculoController;
@@ -16,16 +17,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/test',function (){
+    $user = \App\Models\User::find(3);
+    dd($user->pedidos[0]->producto);
+});
 
 Route::get('/',[MainController::class,"index"] )->name('home');
 
-Route::get('/listar',[VehiculoController::class,"index"] )->name("listar.items");
-Route::get('/crear',[VehiculoController::class,"showFormCreate"] )->name("mostrar.crear");
-Route::get('/editar/{id}',[VehiculoController::class,"showFormEdit"] )->name("mostrar.editar");
-Route::get('/eliminar/{id}',[VehiculoController::class,"destroy"] )->name("eliminar.item");
-Route::POST('/actualizar',[VehiculoController::class,"update"] )->name("actualizar.item");
-Route::get('/mostrar/{id}',[VehiculoController::class,"show"] )->name("mostrar.item");
-Route::POST('/store',[VehiculoController::class,"store"] )->name("crear.item");
+Route::get('/productos',[ProductoController::class,"index"] )->name("listar.productos");
+Route::get('/producto/{id}',[ProductoController::class,"show"] )->name("mostrar.producto");
+
 Route::get('/listarFicheros',[FicheroController::class,"index"] )->name("listar.ficheros");
 
 Route::get('/dashboard', function () {
@@ -33,11 +34,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/confirmar-compra/{id}',[ProductoController::class,'confirmar'])->name('confirmar.compra');
+    Route::post('/comprar',[ProductoController::class,'comprar'])->name('producto.comprar');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/subirFichero',[FicheroController::class,"showFormFichero"] )->name("mostrar.subirFichero");
-    Route::POST('/storeFichero',[FicheroController::class,"store"] )->name("crear.fichero");
+    Route::post('/storeFichero',[FicheroController::class,"store"] )->name("crear.fichero");
     Route::get('/eliminarFichero/{fichero_id}',[FicheroController::class,"destroy"] )->name("eliminar.fichero");
 
 });

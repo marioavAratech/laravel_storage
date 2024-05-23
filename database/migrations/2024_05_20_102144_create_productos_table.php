@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ficheros', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('nombre');
-            $table->string('tipoFichero');
+        Schema::create('productos', function (Blueprint $table) {
+            $table->id();
+            $table->string('titulo');
+            $table->text('descripcion');
+            $table->decimal('precio',10,2);
+            $table->string('imagen')->nullable();
             $table->timestamps();
-
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ficheros');
+        Schema::dropIfExists('productos');
     }
 };

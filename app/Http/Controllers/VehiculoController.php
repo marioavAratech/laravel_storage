@@ -11,9 +11,9 @@ class VehiculoController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {     
+    {
         $vehiculos=Vehiculo::all();
-        return view("itemViews.index",["data"=>$vehiculos]);
+        return view("productos.index",["data"=>$vehiculos]);
     }
 
     /**
@@ -21,7 +21,7 @@ class VehiculoController extends Controller
      */
     public function showFormCreate()
     {
-        return view("itemViews.create");
+        return view("productos.create");
     }
 
     /**
@@ -29,7 +29,7 @@ class VehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         Vehiculo::create([
             "modelo"=>$request->modelo,
             "peso"=>$request->peso,
@@ -45,7 +45,7 @@ class VehiculoController extends Controller
      */
     public function show(string $id)
     {
-        return view("itemViews.show",["id"=>$id]);
+        return view("productos.show",["id"=>$id]);
     }
 
     /**
@@ -53,7 +53,7 @@ class VehiculoController extends Controller
      */
     public function showFormEdit(string $id)
     {
-        return view("itemViews.edit",["id"=>$id]);
+        return view("productos.edit",["id"=>$id]);
     }
 
     /**

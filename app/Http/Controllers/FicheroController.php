@@ -39,7 +39,7 @@ class FicheroController extends Controller
                 'userId'=>Auth::user()->id,
             ]);
             Storage::putFileAs('public/files', $uploadedFile,$randomName);
-            return redirect()->route('home');
+            return redirect()->route('listar.ficheros');
         }
     }
 
