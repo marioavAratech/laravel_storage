@@ -27,13 +27,14 @@
                 </thead>
                 <tbody>
                 @forelse($data as $index => $item)
+
                     <tr>
                         <td scope="row">{{$item->id}}</td>
                         <td scope="row">
                             <a href="storage/files/{{$item->nombre}}" download="{{$item->nombre}}">{{$item->nombre}}</a>
                         </td>
                         <td scope="row">{{$item->tipoFichero}}</td>
-                        <td scope="row">{{$item->userId}}</td>
+                        <td scope="row">{{$item->user->name}}</td>
                         <td scope="row">
                             @if(\Illuminate\Support\Str::contains($item->tipoFichero,'image'))
                                 <img style="width: 80px" src="storage/files/{{$item->nombre}}">

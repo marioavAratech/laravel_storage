@@ -14,7 +14,7 @@ class FicheroController extends Controller
 {
     public function index()
     {
-        $ficheros=Fichero::all();
+        $ficheros= Auth::user()->ficheros;
         return view("ficheroViews.index",["data"=>$ficheros]);
     }
     public function showFormFichero(): View
@@ -36,7 +36,7 @@ class FicheroController extends Controller
             Fichero::create([
                 'nombre'=>$randomName,
                 'tipoFichero'=>$uploadedFile->getClientMimeType(),
-                'userId'=>Auth::user()->id,
+                'user_id'=>Auth::user()->id,
             ]);
             Storage::putFileAs('public/files', $uploadedFile,$randomName);
             return redirect()->route('listar.ficheros');

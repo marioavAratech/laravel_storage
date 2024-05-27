@@ -77,6 +77,6 @@ class ProductoController extends Controller
             'user_id' => Auth::id(),
             'producto_id'=>$request->producto_id
         ]);
-        return redirect()->route('listar.productos')->with('success',"Compra realizada con éxito");
+        return redirect()->route('listar.pedidos')->with('success',"Compra realizada con éxito");
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainController;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
 Route::get('/test',function (){
     $user = \App\Models\User::find(3);
     dd($user->pedidos[0]->producto);
@@ -42,8 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/subirFichero',[FicheroController::class,"showFormFichero"] )->name("mostrar.subirFichero");
     Route::post('/storeFichero',[FicheroController::class,"store"] )->name("crear.fichero");
     Route::get('/eliminarFichero/{fichero_id}',[FicheroController::class,"destroy"] )->name("eliminar.fichero");
-
+    Route::get('/profile', [PedidoController::class, 'index'])->name('listar.pedidos');
+    Route::middleware('check.age')->group(function () {
+        Route::get('/contenido-mayor-edad',function (){
+            echo "Estas dentro del contenido para mayores de 18";
+        });
+    });
 });
-
-
 require __DIR__.'/auth.php';

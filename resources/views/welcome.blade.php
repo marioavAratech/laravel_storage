@@ -5,7 +5,9 @@
                     <div class="col-md-2 box">
                         <a href="{{route('listar.productos')}}">Listar productos</a>
                     </div>
-
+                    <div class="col-md-2 box">
+                        <a href="{{route('listar.pedidos')}}">Listar pedidos</a>
+                    </div>
                     <div class="col-md-2 box">
                         <a href="{{route('listar.ficheros')}}">Listar ficheros</a>
                     </div>
